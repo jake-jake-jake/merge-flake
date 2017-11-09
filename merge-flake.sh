@@ -1,3 +1,4 @@
+ #!/usr/bin/env bash
 FORMAT="%(path)s:%(row)d:%(col)d:~~%(code)s~~%(text)s"
 
 # awk needs escape colors formatted in this way;
