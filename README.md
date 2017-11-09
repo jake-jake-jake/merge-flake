@@ -4,9 +4,12 @@ Make linting Python files your branch modifies a breeze.
 ## Installation
 
 Navigate to your local bin directory, save the script, and make it executable:
-```cd ~/bin/
+
+```
+cd ~/bin/
 curl https://raw.githubusercontent.com/jake-jake-jake/merge-flake/master/merge-flake.sh > merge-flake
-chmod +x merge-flake```
+chmod +x merge-flake
+```
 
 ## Usage
 
