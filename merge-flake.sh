@@ -31,3 +31,5 @@ function merge-flake {
 			      {print path $1 "\t" warn $2 "\t" no_color $3}'
 
 }
+
+merge-flake $1
