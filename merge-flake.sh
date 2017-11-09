@@ -17,7 +17,7 @@ function merge-flake {
 	fi
 	
 	cur_br=$(git branch | grep '*' | cut -d ' ' -f2)
-	merge_diff=$(git diff $cur_br master --name-only | sort | uniq)
+	merge_diff=$(git diff $cur_br master --name-only | grep '.py' | sort | uniq)
 	
 	flake8 --format=$FORMAT $merge_diff | \
 		awk -F"~~" \
