@@ -34,7 +34,7 @@ function merge-flake {
 			      {print path $1 "\t" warn $2 "\t" no_color $3}'
 		rm merge-flake.txt
 	else
-		echo -e "$FILE_COL0R****** No errors found merging" "$WARN_COLOR" "$cur_br" "$FILE_COL0R" "into $WARN_COLOR $target $FILE_COL0R******$NO_COLOR"
+		echo -e "$FILE_COL0R****** No linting errors found ******$NO_COLOR"
 		rm merge-flake.txt
 	fi
 }
