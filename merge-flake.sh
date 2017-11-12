@@ -19,7 +19,10 @@ function merge-flake {
 	cur_br=$(git branch | grep '*' | cut -d ' ' -f2)
 	merge_diff=$(git diff $cur_br master --name-only | grep '.py' | sort | uniq)
 	
-	flake8 --format=$FORMAT $merge_diff | \
+	flake8 --format=$FORMAT $merge_diff > merge-flake.txt
+	errs=$(cat merge-flake.txt | wc -l)
+	if [[ $errs > "0" ]]; then
+		echo merge-flake.txt | \
 		awk -F"~~" \
 			-v path="$FILE_COL0R" \
 			-v error="$ERROR_COLOR" \
@@ -29,7 +32,11 @@ function merge-flake {
 			-v target="$target" \
 			'BEGIN{print path "****** Linting errors merging " warn cur_br path " into " warn target path " ******"}
 			      {print path $1 "\t" warn $2 "\t" no_color $3}'
-
+		rm merge-flake.txt
+	else
+		echo -e "$FILE_COL0R****** No errors found merging" "$WARN_COLOR" "$cur_br" "$FILE_COL0R" "into $WARN_COLOR $target $FILE_COL0R******$NO_COLOR"
+		rm merge-flake.txt
+	fi
 }
 
 merge-flake $1
