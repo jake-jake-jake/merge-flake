@@ -17,12 +17,13 @@ function merge-flake {
 	fi
 	
 	cur_br=$(git branch | grep '*' | cut -d ' ' -f2)
-	merge_diff=$(git diff $cur_br master --name-only | grep '.py' | sort | uniq)
-	
+	merge_diff=$(git log --name-only $cur_br --not origin/master | grep '.py' | sort | uniq)
+
 	flake8 --format=$FORMAT $merge_diff > merge-flake.txt
 	errs=$(cat merge-flake.txt | wc -l)
-	if [[ $errs > "0" ]]; then
-		echo merge-flake.txt | \
+
+	if (( $errs > 0 )); then
+		cat merge-flake.txt | \
 		awk -F"~~" \
 			-v path="$FILE_COL0R" \
 			-v error="$ERROR_COLOR" \
